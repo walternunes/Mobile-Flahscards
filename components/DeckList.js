@@ -1,15 +1,40 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Platform } from 'react-native'
+import { View, Text, StyleSheet, Platform, TouchableOpacity, FlatList} from 'react-native'
 import { white } from '../utils/colors'
+import { INIT_DATA } from '../utils/data'
+
 
 class DeckList extends Component {
   state = {
     ready: false,
   }
+
+  renderDeck = ({element}) => (
+    <TouchableOpacity
+      onPress={() => this.props.navigation.navigate(
+        'DeckList',
+        { deck: element.deck, id: element.key }
+    )}>
+      <View style={styles.deckTile} >
+        <Text style={styles.deckTitle} >{element.title}</Text>
+        <Text style={styles.numCards}>
+          {element.questions.length} { element.questions.length !== 1
+          ? "quizzie questions"
+          : "quizzie question"}
+        </Text>
+      </View>
+    </TouchableOpacity>
+  )
+
   render() {
+    const deckList = INIT_DATA;
     return (
       <View style={styles.item}>
-        <Text >Toffu didnt log any data on this day. </Text>
+        <Text>->{deckList.React.title}</Text>
+        <FlatList
+          data={deckList}
+          renderItem={this.renderDeck}
+        />
       </View>
     )
   }
