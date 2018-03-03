@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, Platform, TouchableOpacity, FlatList} from 'react-native'
 import { white } from '../utils/colors'
 import { connect } from 'react-redux'
-import { INIT_DATA } from '../utils/data'
 import { fetchDecks } from '../utils/api'
 import { getDecks } from '../actions'
 
@@ -14,7 +13,6 @@ class DeckList extends Component {
 
   componentDidMount () {
     this.props.getDecks()
-   // .then((decks) =>  console.log)
   }
 
   render() {
