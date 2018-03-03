@@ -2,6 +2,10 @@ import React from 'react';
 import { StyleSheet, Text, View, Platform, StatusBar  } from 'react-native';
 import { TabNavigator } from 'react-navigation'
 import { purple, white } from './utils/colors'
+import { createStore, applyMiddleware  } from 'redux'
+import reducer from './reducers'
+import ReduxThunk from 'redux-thunk';
+import { Provider } from 'react-redux'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import DeckList from './components/DeckList'
 import AddDeck from './components/AddDeck'
@@ -19,13 +23,13 @@ const Tabs = TabNavigator({
   DeckList: {
     screen: DeckList,
     navigationOptions: {
-      tabBarLabel: 'History'
+      tabBarLabel: 'Decks'
     },
  },
   AddDeck: {
      screen: AddDeck,
     navigationOptions: {
-      tabBarLabel: 'Add Entry'
+      tabBarLabel: 'Add Deck'
     },
   },
 }, {
@@ -50,12 +54,15 @@ const Tabs = TabNavigator({
 
 export default class App extends React.Component {
   render() {
+    const store = createStore(reducer, {}, applyMiddleware(ReduxThunk));
     return (
-      <View style={{flex: 1}}>
-        <FlashCardStatusBar backgroundColor={purple} barStyle="light-content" />
-        <Tabs />
-        <Text> ffffdf </Text>
-      </View>
+      <Provider store={store}>
+        <View style={{flex: 1}}>
+          <FlashCardStatusBar backgroundColor={purple} barStyle="light-content" />
+          <Tabs />
+          <Text> ffffdf </Text>
+        </View>
+      </Provider>
     );
   }
 }

@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Platform, TouchableOpacity, FlatList} from 'react-native'
 import { white } from '../utils/colors'
+import { connect } from 'react-redux'
 import { INIT_DATA } from '../utils/data'
+import { fetchDecks } from '../utils/api'
+import { getDecks } from '../actions'
 
 
 class DeckList extends Component {
@@ -9,31 +12,43 @@ class DeckList extends Component {
     ready: false,
   }
 
-  renderDeck = ({element}) => (
-    <TouchableOpacity
-      onPress={() => this.props.navigation.navigate(
-        'DeckList',
-        { deck: element.deck, id: element.key }
-    )}>
-      <View style={styles.deckTile} >
-        <Text style={styles.deckTitle} >{element.title}</Text>
-        <Text style={styles.numCards}>
-          {element.questions.length} { element.questions.length !== 1
-          ? "quizzie questions"
-          : "quizzie question"}
-        </Text>
-      </View>
-    </TouchableOpacity>
-  )
+  componentDidMount () {
+    this.props.getDecks()
+   // .then((decks) =>  console.log)
+  }
 
   render() {
-    const deckList = INIT_DATA;
+    const { decks } = this.props
+    const deckList = Object.keys(decks).map(function(deckId) {
+
+      return { key: deckId,
+               deck: decks[deckId],
+               title: decks[deckId].title,
+               questions: decks[deckId].questions
+             }
+    })
+
     return (
       <View style={styles.item}>
-        <Text>->{deckList.React.title}</Text>
+        <Text>{JSON.stringify(decks)}</Text>
         <FlatList
           data={deckList}
-          renderItem={this.renderDeck}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate(
+              'DeckList',
+              { deck: item.deck, id: item.key }
+            )}>
+            <View style={styles.deckTile} >
+              <Text style={styles.deckTitle} >{item.title}</Text>
+              <Text style={styles.numCards}>
+                {item.questions.length} { item.questions.length !== 1
+                ? "questions"
+                : "question"}
+              </Text>
+            </View>
+          </TouchableOpacity>
+          )}
         />
       </View>
     )
@@ -62,4 +77,15 @@ const styles = StyleSheet.create({
     paddingBottom: 20
   }
 })
-export default DeckList;
+
+const mapStateToProps = state => {
+  const decks = state.decks;
+
+  return { decks };
+};
+
+
+export default connect(
+  mapStateToProps,
+  {getDecks}
+)(DeckList)
