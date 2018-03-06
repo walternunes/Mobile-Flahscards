@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, Platform, TouchableOpacity, FlatList} from 'react-native'
 import { white } from '../utils/colors'
 import { connect } from 'react-redux'
-import { fetchDecks } from '../utils/api'
 import { getDecks } from '../actions'
 
 
@@ -34,8 +33,7 @@ class DeckList extends Component {
           renderItem={({ item }) => (
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate(
-              'DeckList',
-              { deck: item.deck, id: item.key }
+              'DeckDetail'
             )}>
             <View style={styles.deckTile} >
               <Text style={styles.deckTitle} >{item.title}</Text>

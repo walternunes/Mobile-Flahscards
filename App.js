@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Platform, StatusBar  } from 'react-native';
-import { TabNavigator } from 'react-navigation'
+import { TabNavigator, StackNavigator  } from 'react-navigation'
 import { purple, white } from './utils/colors'
 import { createStore, applyMiddleware  } from 'redux'
 import reducer from './reducers'
@@ -8,6 +8,7 @@ import ReduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import DeckList from './components/DeckList'
+import DeckDetail from './components/DeckDetail'
 import AddDeck from './components/AddDeck'
 import { Constants } from 'expo'
 
@@ -52,6 +53,18 @@ const Tabs = TabNavigator({
   }
 })
 
+
+const MainNavigator = StackNavigator({
+  Home: {
+    screen: Tabs,
+  },
+  DeckDetail: {
+    screen: DeckDetail,
+    navigationOptions: {
+    }
+  },
+})
+
 export default class App extends React.Component {
   render() {
     const store = createStore(reducer, {}, applyMiddleware(ReduxThunk));
@@ -59,8 +72,8 @@ export default class App extends React.Component {
       <Provider store={store}>
         <View style={{flex: 1}}>
           <FlashCardStatusBar backgroundColor={purple} barStyle="light-content" />
-          <Tabs />
-          <Text> ffffdf </Text>
+          <MainNavigator />
+          <Text> ffffdff  </Text>
         </View>
       </Provider>
     );

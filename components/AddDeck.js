@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { KeyboardAvoidingView, Text, TextInput, TouchableOpacity, StyleSheet, Platform, Alert } from 'react-native'
 import { white, purple, black, gray, lightGray } from '../utils/colors'
+import { addDeck } from '../actions'
 
 function AddDeckBtn ({ onPress }) {
   return (
@@ -31,9 +33,7 @@ class AddDeck extends Component {
     if(deckTitle.trim().length === 0){
       Alert.alert("Invalid deck title", "The title must have at least one letter")
     } else {
-      /*this.props.dispatch(addDeck(deckTitle))
-      addNewDeck(deckTitle)*/
-
+      this.props.addDeck(deckTitle)
       this.setState({title: ""})
       this.textInput.clear()
       //CHANGE TO DECK VIEW HERE
@@ -106,4 +106,14 @@ const styles = StyleSheet.create({
     marginRight: 50,
  }
 })
-export default AddDeck;
+
+const mapStateToProps = state => {
+  const decks = state.decks;
+  return { decks };
+};
+
+
+export default connect(
+  mapStateToProps,
+  {addDeck}
+)(AddDeck)
