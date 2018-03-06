@@ -5,15 +5,11 @@ function decks (state = {}, action) {
 
     switch (action.type) {
 
-        case GET_DECKS :
-            return {
-                ...action.decks
-        }
+        case GET_DECK:
+          return [action.deck]
 
-        case GET_DECK :
-        return {
-            [action.deck.title]: action.deck
-        }
+        case GET_DECKS:
+          return action.decks
 
         case ADD_DECK :
             return {

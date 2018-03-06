@@ -10,7 +10,7 @@ class DeckList extends Component {
     ready: false,
   }
 
-  componentDidMount () {
+  componentWillMount () {
     this.props.getDecks()
   }
 
@@ -33,7 +33,8 @@ class DeckList extends Component {
           renderItem={({ item }) => (
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate(
-              'DeckDetail'
+              'DeckDetail',
+              { deck: item.deck, id: item.key }
             )}>
             <View style={styles.deckTile} >
               <Text style={styles.deckTitle} >{item.title}</Text>

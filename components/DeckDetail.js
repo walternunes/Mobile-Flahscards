@@ -4,31 +4,31 @@ import { connect } from 'react-redux'
 import { getDeck } from '../actions'
 
 class DeckDetail extends Component {
-  state = {
-    title: "",
+  static navigationOptions = ({navigation }) => {
+    const { deck } = navigation.state.params
+    return {title: `${deck.title}`}
   }
-  componentDidMount () {
-    this.props.getDeck("React")
+
+  componentWillMount () {
+  //  this.props.getDeck("React")
   }
 
   render() {
-    const { decks } = this.props
     const { deck } = this.props
 
     return (
       <View>
-        <Text>A{JSON.stringify(decks)}</Text>
-        <Text>B{JSON.stringify(deck)}</Text>
+        <Text>B{JSON.stringify(deck)}</Text> 
       </View>
     )
   }
 }
 
 
-const mapStateToProps = state => {
-    const deck = state.deck;
-    return { deck };
-  };
+function mapStateToProps (state, { navigation }) {
+  const { deck, id } = navigation.state.params
+  return { deck, id }
+}
 
 
   export default connect(
