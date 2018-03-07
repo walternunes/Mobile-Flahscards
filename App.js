@@ -12,10 +12,10 @@ import DeckDetail from './components/DeckDetail'
 import AddDeck from './components/AddDeck'
 import { Constants } from 'expo'
 
-function FlashCardStatusBar ({backgroundColor, ...props}) {
+function FlashCardStatusBar (backgroundColor) {
   return (
     <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
-      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+      <StatusBar translucent backgroundColor={backgroundColor} />
     </View>
   )
  }
@@ -35,7 +35,7 @@ const Tabs = TabNavigator({
   },
 }, {
   navigationOptions: {
-    header: null
+    header: FlashCardStatusBar(purple)
   },
   tabBarOptions: {
     activeTintColor: Platform.OS === 'ios' ? purple : white,
@@ -61,6 +61,10 @@ const MainNavigator = StackNavigator({
   DeckDetail: {
     screen: DeckDetail,
     navigationOptions: {
+      headerTintColor: white, 
+      headerStyle: {
+        backgroundColor: purple,
+      }
     }
   },
 })
@@ -71,9 +75,7 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <View style={{flex: 1}}>
-          <FlashCardStatusBar backgroundColor={purple} barStyle="light-content" />
           <MainNavigator />
-          <Text> ffffdff  </Text>
         </View>
       </Provider>
     );

@@ -5,20 +5,16 @@ import { getDeck } from '../actions'
 
 class DeckDetail extends Component {
   static navigationOptions = ({navigation }) => {
-    const { deck } = navigation.state.params
-    return {title: `${deck.title}`}
+    return {title: navigation.state.params.deck.title}
   }
 
-  componentWillMount () {
-  //  this.props.getDeck("React")
-  }
 
   render() {
     const { deck } = this.props
 
     return (
       <View>
-        <Text>B{JSON.stringify(deck)}</Text> 
+        <Text>B{JSON.stringify(deck)}</Text>
       </View>
     )
   }
