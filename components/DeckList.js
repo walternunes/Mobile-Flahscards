@@ -6,9 +6,6 @@ import { getDecks } from '../actions'
 
 
 class DeckList extends Component {
-  state = {
-    ready: false,
-  }
 
   componentWillMount () {
     this.props.getDecks()

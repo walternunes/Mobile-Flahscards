@@ -8,6 +8,8 @@ import ReduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import DeckList from './components/DeckList'
+import AddQuestion from './components/AddQuestion'
+import Quiz from './components/Quiz'
 import DeckDetail from './components/DeckDetail'
 import AddDeck from './components/AddDeck'
 import { Constants } from 'expo'
@@ -61,7 +63,25 @@ const MainNavigator = StackNavigator({
   DeckDetail: {
     screen: DeckDetail,
     navigationOptions: {
-      headerTintColor: white, 
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      }
+    }
+  },
+  AddQuestion: {
+    screen: AddQuestion,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      }
+    }
+  },
+  Quiz: {
+    screen: Quiz,
+    navigationOptions: {
+      headerTintColor: white,
       headerStyle: {
         backgroundColor: purple,
       }
