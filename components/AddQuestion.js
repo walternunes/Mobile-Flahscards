@@ -36,7 +36,7 @@ class AddQuestion extends Component {
   }
 
   submit = () => {
-    const { deckTitle } = this.props
+    const { deck } = this.props
     const questionText = this.state.question
     const answerText = this.state.answer
     const questionAnswer = {
@@ -49,7 +49,8 @@ class AddQuestion extends Component {
     } else if (answerText.trim().length === 0) {
       Alert.alert("Invalid answer", "The answer must have at least one letter")
     } else {
-      this.props.addQuestion(deckTitle, questionAnswer)
+      deck.questions.push(questionAnswer)
+      this.props.addQuestion(deck.title, deck.questions)  
       this.setState({
           question: "",
           answer: ""
@@ -62,10 +63,10 @@ class AddQuestion extends Component {
   }
 
   render() {
-    const { deckTitle } = this.props
+    const { deck } = this.props
     return (
       <KeyboardAvoidingView behavior='padding' style={styles.item}>
-        <Text style={styles.addQuestionText} > Question & Answer ? {deckTitle}</Text>
+        <Text style={styles.addQuestionText} > Question & Answer ? {deck.title}</Text>
         <TextInput
               underlineColorAndroid = "transparent"
               placeholder = "Question"
@@ -137,8 +138,8 @@ const styles = StyleSheet.create({
 
 function mapStateToProps (state, { navigation }) {
   const questions = state.questions;
-  const { deckTitle } = navigation.state.params
-  return { questions, deckTitle };
+  const { deck } = navigation.state.params
+  return { questions, deck };
 };
 
 

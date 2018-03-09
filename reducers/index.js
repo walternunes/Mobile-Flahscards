@@ -25,7 +25,7 @@ function decks (state = {}, action) {
                   ...state,
                   [action.title]: {
                       ...state[action.title],
-                      questions: [...state[action.title].questions, action.question]
+                      questions: action.questions
                   }
               }
 

@@ -1,5 +1,5 @@
 import { INIT_DATA } from '../utils/data'
-import { fetchDecks, addNewDeck, getDeckById } from '../utils/api'
+import { fetchDecks, addNewDeck, addNewQuestion, getDeckById } from '../utils/api'
 
 export const GET_DECKS = 'get_decks';
 export const GET_DECK = 'get_deck';
@@ -29,7 +29,7 @@ export function getDeck (title) {
 
  export function addQuestion (title, question) {
     return dispatch => {
-        addNewDeck(question)
-            .then((response) => dispatch({type: ADD_QUESTION, title: title, question: question}));
+        addNewQuestion(title, question)
+            .then((response) => dispatch({type: ADD_QUESTION, title: title, questions: question}));
     }
  }

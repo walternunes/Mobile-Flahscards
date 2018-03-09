@@ -4,7 +4,7 @@ import { AsyncStorage } from 'react-native'
 const INDEX_KEY = 'mobileflashcards'
 
 export function fetchDecks () {
- // AsyncStorage.clear();
+   // AsyncStorage.clear();
     return AsyncStorage.getItem(INDEX_KEY)
         .then(getAllDecks)
   }
@@ -15,9 +15,9 @@ export function addNewDeck (title) {
     }))
 }
 
-export function addNewQuestion (question) {
+export function addNewQuestion (title, question) {
     return AsyncStorage.mergeItem(INDEX_KEY, JSON.stringify({
-        [title]: {title: title, questions: []}
+        [title]: { questions: question }
     }))
 }
 

@@ -54,7 +54,7 @@ class DeckDetail extends Component {
         <AddQuestionBtn onPress={() => {
             this.props.navigation.navigate(
               'AddQuestion',
-              { deckTitle: deck.title }
+              { deck: deck }
             )}} />
         <DeleteDeckBtn onPress={() => {
            this.props.navigation.goBack()}} />
