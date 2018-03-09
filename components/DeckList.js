@@ -31,7 +31,7 @@ class DeckList extends Component {
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate(
               'DeckDetail',
-              { deck: item.deck, id: item.key }
+              { deck: item.deck }
             )}>
             <View style={styles.deckTile} >
               <Text style={styles.deckTitle} >{item.title}</Text>

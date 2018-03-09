@@ -49,11 +49,12 @@ class DeckDetail extends Component {
         <Text>B{JSON.stringify(deck)}</Text>
         <StartQuizBtn onPress={() => {
           this.props.navigation.navigate(
-            'Quiz' 
+            'Quiz'
           )}} />
         <AddQuestionBtn onPress={() => {
             this.props.navigation.navigate(
-              'AddQuestion'
+              'AddQuestion',
+              { deckTitle: deck.title }
             )}} />
         <DeleteDeckBtn onPress={() => {
            this.props.navigation.goBack()}} />

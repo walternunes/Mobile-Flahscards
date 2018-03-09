@@ -1,4 +1,4 @@
-import { GET_DECKS, ADD_DECK, GET_DECK } from '../actions'
+import { GET_DECKS, ADD_DECK, ADD_QUESTION, GET_DECK } from '../actions'
 import { combineReducers } from 'redux';
 
 function decks (state = {}, action) {
@@ -19,6 +19,15 @@ function decks (state = {}, action) {
                 questions: []
                 }
             }
+
+        case ADD_QUESTION :
+              return {
+                  ...state,
+                  [action.title]: {
+                      ...state[action.title],
+                      questions: [...state[action.title].questions, action.question]
+                  }
+              }
 
         default :
             return state
