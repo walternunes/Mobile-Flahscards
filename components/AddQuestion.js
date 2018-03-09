@@ -50,7 +50,7 @@ class AddQuestion extends Component {
       Alert.alert("Invalid answer", "The answer must have at least one letter")
     } else {
       deck.questions.push(questionAnswer)
-      this.props.addQuestion(deck.title, deck.questions)  
+      this.props.addQuestion(deck.title, deck.questions)
       this.setState({
           question: "",
           answer: ""
@@ -58,6 +58,7 @@ class AddQuestion extends Component {
 
       this.questionInput.clear()
       this.answerInput.clear()
+      this.props.navigation.state.params.onGoBack(deck);
       this.props.navigation.goBack()
     }
   }

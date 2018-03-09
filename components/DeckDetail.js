@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native'
 import { connect } from 'react-redux'
 import { getDeck } from '../actions'
 import { purple, orange, blue, white } from '../utils/colors'
@@ -39,7 +39,9 @@ class DeckDetail extends Component {
     return {title: navigation.state.params.deck.title}
   }
 
-
+  refresh(test) {
+     this.props.navigation.setParams({deck: test})
+  }
 
   render() {
     const { deck } = this.props
@@ -54,7 +56,7 @@ class DeckDetail extends Component {
         <AddQuestionBtn onPress={() => {
             this.props.navigation.navigate(
               'AddQuestion',
-              { deck: deck }
+              {  onGoBack: (returnDeck) => this.props.navigation.setParams({deck: returnDeck}), deck: deck }
             )}} />
         <DeleteDeckBtn onPress={() => {
            this.props.navigation.goBack()}} />
