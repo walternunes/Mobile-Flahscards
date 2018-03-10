@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, Alert, Animated   } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Alert, Animated, Dimensions   } from 'react-native'
 import { connect } from 'react-redux'
 import { getDeck } from '../actions'
-import { purple, orange, blue, white, lightGray, gray, lightPurp } from '../utils/colors'
+import { purple, orange, blue, red, white, lightGray, gray, lightPurp } from '../utils/colors'
 
 class Quiz extends Component {
   state = {
@@ -48,12 +48,25 @@ class Quiz extends Component {
                   )}
                 </View>
               </View>
-            <Text>B{JSON.stringify(deck)}</Text>
+              <View style={styles.buttonsView}>
+                <TouchableOpacity>
+                  <View style={styles.blueButton} >
+                    <Text >Correct</Text>
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <View style={styles.redButton} >
+                    <Text >Incorrect</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
             </View>
         )
       }
   }
 
+
+  const width = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   addBtn: {
@@ -125,7 +138,29 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: blue,
     height: 20
-  }
+  },
+  buttonsView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10 
+  },
+  blueButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: blue,
+    margin: 10,
+    height: 50,
+    width: width * .3
+  },
+  redButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: red,
+    margin: 10,
+    height: 50,
+    width: width * .3
+  },
 })
 
 function mapStateToProps (state, { navigation }) {
