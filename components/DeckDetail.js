@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, Alert, Animated   } from 'react-native'
 import { connect } from 'react-redux'
 import { getDeck } from '../actions'
-import { purple, orange, blue, white } from '../utils/colors'
+import { purple, orange, blue, white, lightGray } from '../utils/colors'
 
 function AddQuestionBtn ({ onPress }) {
   return (
@@ -24,24 +24,14 @@ function StartQuizBtn ({ onPress }) {
   )
 }
 
-function DeleteDeckBtn ({ onPress }) {
-  return (
-    <TouchableOpacity
-      style={ styles.deleteBtn }
-      onPress={ onPress }>
-        <Text style={ styles.deleteBtnText }>Delete</Text>
-    </TouchableOpacity>
-  )
-}
-
 class DeckDetail extends Component {
   state = {
-        fadeAnim: new Animated.Value(1000)
+        slideAnim: new Animated.Value(1000)
     }
 
     componentDidMount() {
         Animated.timing(
-            this.state.fadeAnim,
+            this.state.slideAnim,
             {
                 toValue: 0,
                 duration: 1000
@@ -58,17 +48,26 @@ class DeckDetail extends Component {
   }
 
   render() {
-    let { fadeAnim } = this.state
+    let { slideAnim } = this.state
     const { deck } = this.props
 
     return (
       <Animated.View style={{
                 ...this.props.style,transform: [
               {
-                translateX: fadeAnim
+                translateX: slideAnim
               }
             ]
             }}  >
+        <View style={styles.item}>
+        <View style={styles.deckItem} >
+          <Text>{deck.title}</Text>
+          <Text>
+            {deck.questions.length} { deck.questions.length !== 1
+            ? "questions"
+            : "question"}
+          </Text>
+        </View>
         <Text>B{JSON.stringify(deck)}</Text>
         <StartQuizBtn onPress={() => {
           this.props.navigation.navigate(
@@ -79,8 +78,7 @@ class DeckDetail extends Component {
               'AddQuestion',
               {  onGoBack: (returnDeck) => this.props.navigation.setParams({deck: returnDeck}), deck: deck }
             )}} />
-        <DeleteDeckBtn onPress={() => {
-           this.props.navigation.goBack()}} />
+        </View>
     </Animated.View>
     )
   }
@@ -115,19 +113,28 @@ const styles = StyleSheet.create({
     fontSize: 22,
     textAlign: 'center',
   },
-  deleteBtn: {
-    backgroundColor: blue,
-    padding: 10,
-    borderRadius: 7,
-    height: 45,
-    marginTop: 10,
-    marginLeft: 40,
-    marginRight: 40,
+  item: {
+    borderRadius:  2,
+    padding: 20,
+    marginLeft: 10,
+    marginRight: 10,
+    marginTop: 17,
+    justifyContent: 'center',
+    shadowRadius: 3,
+    shadowOpacity: 0.8,
+    shadowColor: 'rgba(0, 0, 0, 0.24)',
+    shadowOffset: {
+      width: 0,
+      height: 3
+    },
   },
-  deleteBtnText: {
-    color: white,
-    fontSize: 22,
-    textAlign: 'center',
+  deckItem: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: lightGray,
+    height: 125,
+    borderRadius: 10,
+    marginTop: 10
   }
 })
 function mapStateToProps (state, { navigation }) {
