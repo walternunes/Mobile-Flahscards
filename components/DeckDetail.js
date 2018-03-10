@@ -69,10 +69,13 @@ class DeckDetail extends Component {
           </Text>
         </View>
         <Text>B{JSON.stringify(deck)}</Text>
-        <StartQuizBtn onPress={() => {
-          this.props.navigation.navigate(
-            'Quiz'
-          )}} />
+        { deck.questions.length > 0 && (
+          <StartQuizBtn onPress={() => {
+            this.props.navigation.navigate(
+              'Quiz',
+              { deck: deck }
+            )}} />
+        )}
         <AddQuestionBtn onPress={() => {
             this.props.navigation.navigate(
               'AddQuestion',
