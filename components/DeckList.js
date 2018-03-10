@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Platform, TouchableOpacity, FlatList} from 'react-native'
-import { white } from '../utils/colors'
+import { white, lightGray } from '../utils/colors'
 import { connect } from 'react-redux'
 import { getDecks } from '../actions'
 
@@ -33,9 +33,9 @@ class DeckList extends Component {
               'DeckDetail',
               { deck: item.deck }
             )}>
-            <View style={styles.deckTile} >
-              <Text style={styles.deckTitle} >{item.title}</Text>
-              <Text style={styles.numCards}>
+            <View style={styles.deckItem} >
+              <Text>{item.title}</Text>
+              <Text>
                 {item.questions.length} { item.questions.length !== 1
                 ? "questions"
                 : "question"}
@@ -46,6 +46,30 @@ class DeckList extends Component {
         />
       </View>
     )
+  }
+}
+
+const transitionConfig = () => {
+  return {
+    transitionSpec: {
+      duration: 750,
+      easing: Easing.out(Easing.poly(4)),
+      timing: Animated.timing,
+      useNativeDriver: true,
+    },
+    screenInterpolator: sceneProps => {
+      const { layout, position, scene } = sceneProps
+
+      const thisSceneIndex = scene.index
+      const width = layout.initWidth
+
+      const translateX = position.interpolate({
+        inputRange: [thisSceneIndex - 1, thisSceneIndex],
+        outputRange: [width, 0],
+      })
+
+      return { transform: [ { translateX } ] }
+    },
   }
 }
 
@@ -64,6 +88,21 @@ const styles = StyleSheet.create({
       width: 0,
       height: 3
     },
+  },deckItem: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: lightGray,
+    height: 85,
+    borderRadius: 10,
+    marginTop: 10,
+    shadowRadius: 3,
+    shadowOpacity: 0.8,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    elevation: 1
   },
   noDataText: {
     fontSize: 20,

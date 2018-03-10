@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Alert, Animated   } from 'react-native'
 import { connect } from 'react-redux'
 import { getDeck } from '../actions'
 import { purple, orange, blue, white } from '../utils/colors'
@@ -35,6 +35,20 @@ function DeleteDeckBtn ({ onPress }) {
 }
 
 class DeckDetail extends Component {
+  state = {
+        fadeAnim: new Animated.Value(1000)
+    }
+
+    componentDidMount() {
+        Animated.timing(
+            this.state.fadeAnim,
+            {
+                toValue: 0,
+                duration: 1000
+            }
+        ).start()
+    }
+
   static navigationOptions = ({navigation }) => {
     return {title: navigation.state.params.deck.title}
   }
@@ -44,10 +58,17 @@ class DeckDetail extends Component {
   }
 
   render() {
+    let { fadeAnim } = this.state
     const { deck } = this.props
 
     return (
-      <View>
+      <Animated.View style={{
+                ...this.props.style,transform: [
+              {
+                translateX: fadeAnim
+              }
+            ]
+            }}  >
         <Text>B{JSON.stringify(deck)}</Text>
         <StartQuizBtn onPress={() => {
           this.props.navigation.navigate(
@@ -60,7 +81,7 @@ class DeckDetail extends Component {
             )}} />
         <DeleteDeckBtn onPress={() => {
            this.props.navigation.goBack()}} />
-      </View>
+    </Animated.View>
     )
   }
 }
