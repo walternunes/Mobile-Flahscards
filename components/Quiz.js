@@ -15,6 +15,11 @@ class Quiz extends Component {
     return {title: 'Quiz'}
   }
 
+  getQuestionAnswerText = (isQuestion, questionItem) => {
+      return isQuestion ? `Question: ${questionItem.question}`:
+              `Answer: ${questionItem.answer}`
+  }
+
 
   render() {
     const { deck } = this.props
@@ -22,18 +27,25 @@ class Quiz extends Component {
         return (
             <View style={styles.item}>
               <View style={styles.deckItem} >
-                <View style={styles.deckQuestionView} >
-                  <Text>Card { currentQuestion + 1 }/{deck.questions.length}</Text>
-                </View>
-                <View style={styles.deckDescription} >
-                  { isQuestion && (
-                    <Text>Question: {deck.questions[currentQuestion].question}</Text>
+                <View style={styles.cardRow} >
+                  { currentQuestion !== deck.questions.length && (
+                    <Text>Card { currentQuestion + 1 }/{deck.questions.length}</Text>
                   )}
-                  { !isQuestion && (
-                    <Text>Answer: {deck.questions[currentQuestion].answer}</Text>
+                  { currentQuestion === deck.questions.length && (
+                    <Text>Your score</Text>
                   )}
                 </View>
-                <View style={styles.deckChangeView} >
+
+                <View style={styles.cardDescription} >
+                    { currentQuestion !== deck.questions.length && (
+                      <Text>{this.getQuestionAnswerText(isQuestion, deck.questions[currentQuestion])}</Text>
+                    )}
+                    { currentQuestion === deck.questions.length && (
+                      <Text>Your score was {this.state.countCorrect} out of {deck.questions.length}</Text>
+                    )}
+                </View>
+
+                <View style={styles.cardRow} >
                   { isQuestion && (
                     <TouchableOpacity
                       onPress={() => this.setState({ isQuestion: !this.state.isQuestion })}>
@@ -48,13 +60,18 @@ class Quiz extends Component {
                   )}
                 </View>
               </View>
+
               <View style={styles.buttonsView}>
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => this.setState({ currentQuestion: this.state.currentQuestion + 1, countCorrect: this.state.countCorrect + 1, isQuestion: true })}
+                >
                   <View style={styles.blueButton} >
                     <Text >Correct</Text>
                   </View>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => this.setState({ currentQuestion: this.state.currentQuestion + 1, isQuestion: true })}
+                >
                   <View style={styles.redButton} >
                     <Text >Incorrect</Text>
                   </View>
@@ -69,34 +86,6 @@ class Quiz extends Component {
   const width = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
-  addBtn: {
-    backgroundColor: purple,
-    padding: 10,
-    borderRadius: 7,
-    height: 45,
-    marginTop: 10,
-    marginLeft: 40,
-    marginRight: 40,
-  },
-  addBtnText: {
-    color: white,
-    fontSize: 22,
-    textAlign: 'center',
-  },
-  startBtn: {
-    backgroundColor: orange,
-    padding: 10,
-    borderRadius: 7,
-    height: 45,
-    marginTop: 10,
-    marginLeft: 40,
-    marginRight: 40,
-  },
-  startBtnText: {
-    color: white,
-    fontSize: 22,
-    textAlign: 'center',
-  },
   item: {
     borderRadius:  2,
     padding: 20,
@@ -117,7 +106,7 @@ const styles = StyleSheet.create({
     height: 200,
     borderRadius: 10,
   },
-  deckDescription: {
+  cardDescription: {
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: lightGray,
@@ -126,24 +115,18 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     margin: 10
   },
-  deckQuestionView: {
+  cardRow: {
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: orange,
-    height: 40,
+    height: 30,
     marginTop: 10
-  },
-  deckChangeView: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: blue,
-    height: 20
   },
   buttonsView: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 10 
+    marginTop: 10
   },
   blueButton: {
     alignItems: 'center',
