@@ -28,55 +28,58 @@ class Quiz extends Component {
             <View style={styles.item}>
               <View style={styles.deckItem} >
                 <View style={styles.cardRow} >
-                  { currentQuestion !== deck.questions.length && (
-                    <Text>Card { currentQuestion + 1 }/{deck.questions.length}</Text>
-                  )}
-                  { currentQuestion === deck.questions.length && (
-                    <Text>Your score</Text>
-                  )}
+                    <Text>{currentQuestion === deck.questions.length ? "Your Score" :
+                          `Card ${ currentQuestion + 1 }/${deck.questions.length}`}</Text>
                 </View>
 
                 <View style={styles.cardDescription} >
-                    { currentQuestion !== deck.questions.length && (
-                      <Text>{this.getQuestionAnswerText(isQuestion, deck.questions[currentQuestion])}</Text>
-                    )}
-                    { currentQuestion === deck.questions.length && (
-                      <Text>Your score was {this.state.countCorrect} out of {deck.questions.length}</Text>
-                    )}
+                      <Text>{currentQuestion !== deck.questions.length ? this.getQuestionAnswerText(isQuestion, deck.questions[currentQuestion]) :
+                             `Your score was ${this.state.countCorrect} out of ${deck.questions.length}`}</Text>
                 </View>
 
-                <View style={styles.cardRow} >
-                  { isQuestion && (
-                    <TouchableOpacity
-                      onPress={() => this.setState({ isQuestion: !this.state.isQuestion })}>
-                      <Text>Answer</Text>
-                    </TouchableOpacity>
-                  )}
-                  { !isQuestion && (
-                    <TouchableOpacity
-                      onPress={() => this.setState({ isQuestion: !this.state.isQuestion })}>
-                      <Text>Question</Text>
-                    </TouchableOpacity>
-                  )}
-                </View>
+                { currentQuestion !== deck.questions.length && (
+                  <View style={styles.cardRow} >
+                      <TouchableOpacity
+                        onPress={() => this.setState({ isQuestion: !this.state.isQuestion })}>
+                        <Text>{this.state.isQuestion ? "Show Answer" : "Show Question"}</Text>
+                      </TouchableOpacity>
+                  </View>
+                )}
               </View>
 
-              <View style={styles.buttonsView}>
-                <TouchableOpacity
-                  onPress={() => this.setState({ currentQuestion: this.state.currentQuestion + 1, countCorrect: this.state.countCorrect + 1, isQuestion: true })}
-                >
-                  <View style={styles.blueButton} >
-                    <Text >Correct</Text>
-                  </View>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => this.setState({ currentQuestion: this.state.currentQuestion + 1, isQuestion: true })}
-                >
-                  <View style={styles.redButton} >
-                    <Text >Incorrect</Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
+              { currentQuestion !== deck.questions.length && (
+                <View style={styles.buttonsView}>
+                  <TouchableOpacity
+                    onPress={() => this.setState({ currentQuestion: this.state.currentQuestion + 1, countCorrect: this.state.countCorrect + 1, isQuestion: true })}>
+                    <View style={styles.blueButton} >
+                      <Text >Correct</Text>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => this.setState({ currentQuestion: this.state.currentQuestion + 1, isQuestion: true })}>
+                    <View style={styles.redButton} >
+                      <Text >Incorrect</Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              )}
+
+              { currentQuestion === deck.questions.length && (
+                <View style={styles.buttonsView}>
+                  <TouchableOpacity
+                    onPress={() => this.setState({ currentQuestion: 0, countCorrect: 0, isQuestion: true })}>
+                    <View style={styles.blueButton} >
+                      <Text >Restart</Text>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => this.props.navigation.goBack()}> 
+                    <View style={styles.redButton} >
+                      <Text >Return</Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              )}
             </View>
         )
       }
