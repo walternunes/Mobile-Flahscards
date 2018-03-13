@@ -67,7 +67,7 @@ class AddQuestion extends Component {
     const { deck } = this.props
     return (
       <KeyboardAvoidingView behavior='padding' style={styles.item}>
-        <Text style={styles.addQuestionText} > Question & Answer ? {deck.title}</Text>
+        <Text style={styles.addQuestionText} > Question & Answer ?</Text>
         <TextInput
               underlineColorAndroid = "transparent"
               placeholder = "Question"

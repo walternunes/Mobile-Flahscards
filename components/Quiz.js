@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Alert, Animated, Dimensions  
 import { connect } from 'react-redux'
 import { getDeck } from '../actions'
 import { purple, orange, blue, red, white, lightGray, gray, lightPurp } from '../utils/colors'
+import { clearLocalNotification, setLocalNotification } from '../utils/helper'
 
 class Quiz extends Component {
   state = {
@@ -13,6 +14,11 @@ class Quiz extends Component {
 
   static navigationOptions = ({navigation }) => {
     return {title: 'Quiz'}
+  }
+
+  restartNotification() {
+      clearLocalNotification()
+        .then(setLocalNotification());
   }
 
   getQuestionAnswerText = (isQuestion, questionItem) => {
@@ -67,13 +73,13 @@ class Quiz extends Component {
               { currentQuestion === deck.questions.length && (
                 <View style={styles.buttonsView}>
                   <TouchableOpacity
-                    onPress={() => this.setState({ currentQuestion: 0, countCorrect: 0, isQuestion: true })}>
+                    onPress={() => {this.restartNotification(); this.setState({ currentQuestion: 0, countCorrect: 0, isQuestion: true })}}>
                     <View style={styles.blueButton} >
                       <Text >Restart</Text>
                     </View>
                   </TouchableOpacity>
                   <TouchableOpacity
-                    onPress={() => this.props.navigation.goBack()}> 
+                    onPress={() => {this.restartNotification(); this.props.navigation.goBack()}}>
                     <View style={styles.redButton} >
                       <Text >Return</Text>
                     </View>

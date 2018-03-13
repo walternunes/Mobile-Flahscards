@@ -43,8 +43,8 @@ class DeckDetail extends Component {
     return {title: navigation.state.params.deck.title}
   }
 
-  refresh(test) {
-     this.props.navigation.setParams({deck: test})
+  refresh(returnDeck) {
+     this.props.navigation.setParams({deck: returnDeck})
   }
 
   render() {
