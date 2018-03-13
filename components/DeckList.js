@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Platform, TouchableOpacity, FlatList} from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native'
 import { white, lightGray } from '../utils/colors'
 import { connect } from 'react-redux'
 import { getDecks } from '../actions'
@@ -75,7 +75,7 @@ const transitionConfig = () => {
 
 const styles = StyleSheet.create({
   item: {
-    borderRadius: Platform.OS === 'ios' ? 16 : 2,
+    borderRadius: 2,
     padding: 20,
     marginLeft: 10,
     marginRight: 10,

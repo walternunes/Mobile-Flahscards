@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { KeyboardAvoidingView, Text, TextInput, TouchableOpacity, StyleSheet, Platform, Alert } from 'react-native'
+import { KeyboardAvoidingView, Text, TextInput, TouchableOpacity, StyleSheet, Keyboard, Alert } from 'react-native'
 import { white, purple, black, gray, lightGray } from '../utils/colors'
 import { addDeck } from '../actions'
 
@@ -18,7 +18,7 @@ class AddDeck extends Component {
   state = {
     title: "",
   }
-
+ 
   updateTitle = (title) => {
     this.setState({ title: title })
   }
@@ -36,10 +36,10 @@ class AddDeck extends Component {
       this.props.addDeck(deckTitle)
       this.setState({title: ""})
       this.textInput.clear()
-      //CHANGE TO DECK VIEW HERE
+      Keyboard.dismiss()
       this.props.navigation.navigate(
-        'DeckList',
-        { deck: deck, id: deckTitle }
+        'DeckDetail',
+        { deck: deck }
       )
     }
   }
@@ -64,7 +64,7 @@ class AddDeck extends Component {
 
 const styles = StyleSheet.create({
   item: {
-    borderRadius: Platform.OS === 'ios' ? 16 : 2,
+    borderRadius: 2,
     padding: 20,
     marginLeft: 10,
     marginRight: 10,
