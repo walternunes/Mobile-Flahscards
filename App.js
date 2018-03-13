@@ -13,6 +13,7 @@ import Quiz from './components/Quiz'
 import DeckDetail from './components/DeckDetail'
 import AddDeck from './components/AddDeck'
 import { Constants } from 'expo'
+import { setLocalNotification } from './utils/helper'
 
 function FlashCardStatusBar (backgroundColor) {
   return (
@@ -90,6 +91,11 @@ const MainNavigator = StackNavigator({
 })
 
 export default class App extends React.Component {
+
+  componentDidMount() {
+      setLocalNotification()
+  }
+
   render() {
     const store = createStore(reducer, {}, applyMiddleware(ReduxThunk));
     return (
