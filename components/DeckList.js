@@ -24,7 +24,6 @@ class DeckList extends Component {
 
     return (
       <View style={styles.item}>
-        <Text>{JSON.stringify(decks)}</Text>
         <FlatList
           data={deckList}
           renderItem={({ item }) => (

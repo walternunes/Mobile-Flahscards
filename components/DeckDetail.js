@@ -68,7 +68,6 @@ class DeckDetail extends Component {
             : "question"}
           </Text>
         </View>
-        <Text>B{JSON.stringify(deck)}</Text>
         { deck.questions.length > 0 && (
           <StartQuizBtn onPress={() => {
             this.props.navigation.navigate(
