@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, Alert, Animated   } from 'react-native'
 import { connect } from 'react-redux'
 import { getDeck } from '../actions'
-import { purple, orange, blue, white, lightGray } from '../utils/colors'
+import { darkGreen, orange, blue, white, lightGray } from '../utils/colors'
 
 function AddQuestionBtn ({ onPress }) {
   return (
@@ -88,7 +88,7 @@ class DeckDetail extends Component {
 
 const styles = StyleSheet.create({
   addBtn: {
-    backgroundColor: purple,
+    backgroundColor: darkGreen,
     padding: 10,
     borderRadius: 7,
     height: 45,

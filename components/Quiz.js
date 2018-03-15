@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, Alert, Animated, Dimensions   } from 'react-native'
 import { connect } from 'react-redux'
 import { getDeck } from '../actions'
-import { purple, orange, blue, red, white, lightGray, gray, lightPurp } from '../utils/colors'
+import { darkGreen, orange, blue, red, white, lightGray, gray, lightPurp } from '../utils/colors'
 import { clearLocalNotification, setLocalNotification } from '../utils/helper'
 
 class Quiz extends Component {

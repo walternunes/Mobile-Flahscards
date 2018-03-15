@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { KeyboardAvoidingView, Text, TextInput, TouchableOpacity, StyleSheet, Keyboard, Alert } from 'react-native'
-import { white, purple, black, gray, lightGray } from '../utils/colors'
+import { white, darkGreen, black, gray, lightGray } from '../utils/colors'
 import { addDeck } from '../actions'
 
 function AddDeckBtn ({ onPress }) {
@@ -18,7 +18,7 @@ class AddDeck extends Component {
   state = {
     title: "",
   }
- 
+
   updateTitle = (title) => {
     this.setState({ title: title })
   }
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     },
   },
   addBtn: {
-    backgroundColor: purple,
+    backgroundColor: darkGreen,
     padding: 10,
     borderRadius: 7,
     height: 45,

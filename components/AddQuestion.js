@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, KeyboardAvoidingView, TextInput, TouchableOpacity, Platform, Alert } from 'react-native'
 import { connect } from 'react-redux'
 import { addQuestion } from '../actions'
-import { white, purple, black, lightGray, gray } from '../utils/colors'
+import { white, darkGreen, black, lightGray, gray } from '../utils/colors'
 
 function AddQuestionBtn ({ onPress }) {
   return (
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     },
   },
   addBtn: {
-    backgroundColor: purple,
+    backgroundColor: darkGreen,
     padding: 10,
     borderRadius: 7,
     height: 45,

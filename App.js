@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Platform, StatusBar  } from 'react-native';
 import { TabNavigator, StackNavigator  } from 'react-navigation'
-import { purple, white } from './utils/colors'
+import { darkGreen, white } from './utils/colors'
 import { createStore, applyMiddleware  } from 'redux'
 import reducer from './reducers'
 import ReduxThunk from 'redux-thunk';
@@ -38,13 +38,13 @@ const Tabs = TabNavigator({
   },
 }, {
   navigationOptions: {
-    header: FlashCardStatusBar(purple)
+    header: FlashCardStatusBar(darkGreen)
   },
   tabBarOptions: {
-    activeTintColor: Platform.OS === 'ios' ? purple : white,
+    activeTintColor: white,
     style: {
       height: 56,
-      backgroundColor: Platform.OS === 'ios' ? white : purple,
+      backgroundColor: darkGreen,
       shadowColor: 'rgba(0, 0, 0, 0.24)',
       shadowOffset: {
         width: 0,
@@ -66,7 +66,7 @@ const MainNavigator = StackNavigator({
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: purple,
+        backgroundColor: darkGreen,
       }
     }
   },
@@ -75,7 +75,7 @@ const MainNavigator = StackNavigator({
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: purple,
+        backgroundColor: darkGreen,
       }
     }
   },
@@ -84,7 +84,7 @@ const MainNavigator = StackNavigator({
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {
-        backgroundColor: purple,
+        backgroundColor: darkGreen,
       }
     }
   },
