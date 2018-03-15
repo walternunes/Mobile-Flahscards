@@ -7,13 +7,8 @@ Project 3: This project addresses the fundamentals of building a native applicat
 ### How to run the project
 * Clone the repo using ```git clone https://github.com/walternunes/Mobile-Flahscards.git``` and ```cd``` into the folder
 * Install dependecies typing ```yarn install```
-* Assuming that the device has Expo installed, run the server typing ```yarn start``` 
-
-* Open another console and access the folder where the project was cloned
-* Enter in client folder typing ```cd client```
-* Install client dependecies typing ```npm install```
-* Run the client typing ```npm start```
-* Access the page ```http://localhost:3000/```
+* Assuming that the device has Expo installed, run ```yarn start``` 
+* Press 'a' to run on android device or emulator
 
 ### Platform
 This project was tested on Android device
