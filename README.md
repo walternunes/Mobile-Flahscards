@@ -2,7 +2,9 @@
 This project is part of React Nanodegree
 
 ### About
-Project 3: This project addresses the fundamentals of building a native application, including endless lists, routing, and user input. Learning how to use React Native to build mobile applications.
+Project 3: This project addresses the fundamentals of building a native application, including endless lists, routing, and user input. Learning how to use React Native to build mobile applications.<BR>
+This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
+
 
 ### How to run the project
 * Clone the repo using ```git clone https://github.com/walternunes/Mobile-Flahscards.git``` and ```cd``` into the folder
