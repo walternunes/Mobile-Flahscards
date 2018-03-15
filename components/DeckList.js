@@ -13,12 +13,11 @@ class DeckList extends Component {
 
   render() {
     const { decks } = this.props
-    const deckList = Object.keys(decks).map(function(deckId) {
-
-      return { key: deckId,
-               deck: decks[deckId],
-               title: decks[deckId].title,
-               questions: decks[deckId].questions
+    const deckList = Object.keys(decks).map(function(id) {
+      return { key: id,
+               deck: decks[id],
+               title: decks[id].title,
+               questions: decks[id].questions
              }
     })
 
@@ -33,7 +32,7 @@ class DeckList extends Component {
               { deck: item.deck }
             )}>
             <View style={styles.deckItem} >
-              <Text>{item.title}</Text>
+              <Text style={styles.deckItemTitle}>{item.title}</Text>
               <Text>
                 {item.questions.length} { item.questions.length !== 1
                 ? "questions"
@@ -102,11 +101,9 @@ const styles = StyleSheet.create({
       height: 2
     },
     elevation: 1
-  },
-  noDataText: {
-    fontSize: 20,
-    paddingTop: 20,
-    paddingBottom: 20
+  },deckItemTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
   }
 })
 

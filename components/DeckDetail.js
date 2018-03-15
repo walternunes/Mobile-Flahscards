@@ -60,26 +60,22 @@ class DeckDetail extends Component {
             ]
             }}  >
         <View style={styles.item}>
-        <View style={styles.deckItem} >
-          <Text>{deck.title}</Text>
-          <Text>
-            {deck.questions.length} { deck.questions.length !== 1
-            ? "questions"
-            : "question"}
-          </Text>
-        </View>
-        { deck.questions.length > 0 && (
-          <StartQuizBtn onPress={() => {
-            this.props.navigation.navigate(
-              'Quiz',
-              { deck: deck }
-            )}} />
-        )}
-        <AddQuestionBtn onPress={() => {
-            this.props.navigation.navigate(
-              'AddQuestion',
-              {  onGoBack: (returnDeck) => this.props.navigation.setParams({deck: returnDeck}), deck: deck }
-            )}} />
+          <View style={styles.deckItem} >
+            <Text style={styles.deckItemTitle}>{deck.title}</Text>
+            <Text> {deck.questions.length} { deck.questions.length !== 1 ? "questions" : "question"} </Text>
+          </View>
+          { deck.questions.length > 0 && (
+            <StartQuizBtn onPress={() => {
+              this.props.navigation.navigate(
+                'Quiz',
+                { deck: deck }
+              )}} />
+          )}
+          <AddQuestionBtn onPress={() => {
+              this.props.navigation.navigate(
+                'AddQuestion',
+                {  onGoBack: (returnDeck) => this.props.navigation.setParams({deck: returnDeck}), deck: deck }
+              )}} />
         </View>
     </Animated.View>
     )
@@ -137,6 +133,9 @@ const styles = StyleSheet.create({
     height: 125,
     borderRadius: 10,
     marginTop: 10
+  },deckItemTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
   }
 })
 function mapStateToProps (state, { navigation }) {

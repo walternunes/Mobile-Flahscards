@@ -4,7 +4,6 @@ import { AsyncStorage } from 'react-native'
 const INDEX_KEY = 'mobileflashcards'
 
 export function fetchDecks () {
-   // AsyncStorage.clear();
     return AsyncStorage.getItem(INDEX_KEY)
         .then(getAllDecks)
   }

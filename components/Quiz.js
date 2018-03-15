@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity, Alert, Animated, Dimensions   } from 'react-native'
 import { connect } from 'react-redux'
 import { getDeck } from '../actions'
-import { darkGreen, orange, blue, red, white, lightGray, gray, lightPurp } from '../utils/colors'
+import { darkGreen, orange, blue, red, white, lightGray, gray, lightPurp, purple } from '../utils/colors'
 import { clearLocalNotification, setLocalNotification } from '../utils/helper'
 
 class Quiz extends Component {
@@ -34,8 +34,8 @@ class Quiz extends Component {
             <View style={styles.item}>
               <View style={styles.deckItem} >
                 <View style={styles.cardRow} >
-                    <Text>{currentQuestion === deck.questions.length ? "Your Score" :
-                          `Card ${ currentQuestion + 1 }/${deck.questions.length}`}</Text>
+                    <Text style={styles.countTitle}>{currentQuestion === deck.questions.length ? "Your Score" :
+                          `Question ${ currentQuestion + 1 }/${deck.questions.length}`}</Text>
                 </View>
 
                 <View style={styles.cardDescription} >
@@ -47,7 +47,7 @@ class Quiz extends Component {
                   <View style={styles.cardRow} >
                       <TouchableOpacity
                         onPress={() => this.setState({ isQuestion: !this.state.isQuestion })}>
-                        <Text>{this.state.isQuestion ? "Show Answer" : "Show Question"}</Text>
+                        <Text style={styles.showAnswerText}>{this.state.isQuestion ? "Show Answer" : "Show Question"}</Text>
                       </TouchableOpacity>
                   </View>
                 )}
@@ -58,13 +58,13 @@ class Quiz extends Component {
                   <TouchableOpacity
                     onPress={() => this.setState({ currentQuestion: this.state.currentQuestion + 1, countCorrect: this.state.countCorrect + 1, isQuestion: true })}>
                     <View style={styles.blueButton} >
-                      <Text >Correct</Text>
+                      <Text style={styles.buttonText}>Correct</Text>
                     </View>
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() => this.setState({ currentQuestion: this.state.currentQuestion + 1, isQuestion: true })}>
                     <View style={styles.redButton} >
-                      <Text >Incorrect</Text>
+                      <Text style={styles.buttonText}>Incorrect</Text>
                     </View>
                   </TouchableOpacity>
                 </View>
@@ -75,13 +75,13 @@ class Quiz extends Component {
                   <TouchableOpacity
                     onPress={() => {this.restartNotification(); this.setState({ currentQuestion: 0, countCorrect: 0, isQuestion: true })}}>
                     <View style={styles.blueButton} >
-                      <Text >Restart</Text>
+                      <Text style={styles.buttonText}>Restart</Text>
                     </View>
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={() => {this.restartNotification(); this.props.navigation.goBack()}}>
                     <View style={styles.redButton} >
-                      <Text >Return</Text>
+                      <Text style={styles.buttonText}>Return</Text>
                     </View>
                   </TouchableOpacity>
                 </View>
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   cardRow: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: orange,
+    backgroundColor: gray,
     height: 30,
     marginTop: 10
   },
@@ -153,6 +153,19 @@ const styles = StyleSheet.create({
     height: 50,
     width: width * .3
   },
+  countTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  buttonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  showAnswerText: {
+    fontSize: 18,
+    color: purple,
+    fontWeight: 'bold',
+  }
 })
 
 function mapStateToProps (state, { navigation }) {
